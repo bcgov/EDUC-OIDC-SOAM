@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @author Marco Villeneuve
  */
-public class SoamFirstTimeLoginAuthenticator extends AbstractIdpAuthenticator {
+public class SoamFirstTimeLoginAuthenticator extends AbstractIdpAuthenticator  {
 
   private static Logger logger = Logger.getLogger(SoamFirstTimeLoginAuthenticator.class);
 
@@ -107,7 +107,7 @@ public class SoamFirstTimeLoginAuthenticator extends AbstractIdpAuthenticator {
         throw new SoamRuntimeException("Account type is not bcsc or bceid check IDP mappers");
     }
 
-    if (context.getSession().users().getUserByUsername(username, realm) == null) {
+    if (context.getSession().users().getUserByUsername(realm, username) == null) {
       logger.debugf("No duplication detected. Creating account for user '%s' and linking with identity provider '%s' .",
         username, brokerContext.getIdpConfig().getAlias());
 
@@ -127,7 +127,7 @@ public class SoamFirstTimeLoginAuthenticator extends AbstractIdpAuthenticator {
       context.success();
     } else {
       logger.debug("SOAM: Existing " + accountType + " user found with username: " + username);
-      UserModel existingUser = context.getSession().users().getUserByUsername(username, realm);
+      UserModel existingUser = context.getSession().users().getUserByUsername(realm, username);
       context.setUser(existingUser);
       context.success();
     }

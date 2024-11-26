@@ -17,7 +17,6 @@ import org.keycloak.models.UserModel;
 import org.keycloak.representations.JsonWebToken;
 import org.keycloak.util.JsonSerialization;
 
-import javax.json.JsonReader;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,6 @@ public class SoamPostLoginAuthenticator extends AbstractIdpAuthenticator {
 
   @Override
   public void authenticate(AuthenticationFlowContext context) {
-    JsonReader reader = null;
     try {
       logger.debug("SOAM Post: inside authenticate");
 
@@ -117,10 +115,6 @@ public class SoamPostLoginAuthenticator extends AbstractIdpAuthenticator {
       context.success();
     } catch (Exception e) {
       throw new SoamRuntimeException(e);
-    } finally {
-      if (reader != null) {
-        reader.close();
-      }
     }
   }
 

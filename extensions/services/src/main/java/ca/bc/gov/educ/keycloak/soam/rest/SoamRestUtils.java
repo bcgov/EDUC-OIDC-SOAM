@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -45,7 +46,7 @@ public class SoamRestUtils {
     return soamRestUtilsInstance;
   }
 
-  public RestTemplate getRestTemplate(List<String> scopes) {
+  public RestClient getRestTemplate(List<String> scopes) {
     logger.debug("Calling get token method");
     ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
     resourceDetails.setClientId(props.getClientID());
